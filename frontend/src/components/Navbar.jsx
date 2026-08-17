@@ -11,7 +11,7 @@ export default function Navbar() {
           {/* 1. Brand Logo */}
           <div className="flex items-center gap-6">
             <a href="/" className="flex items-center gap-2.5 group">
-              <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-blue-400 flex items-center justify-center font-black text-white text-xl shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform">
+              <div className="h-9 w-9 rounded-xl bg-linear-to-tr from-blue-600 via-indigo-600 to-blue-400 flex items-center justify-center font-black text-white text-xl shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform">
                 E
               </div>
               <span className="text-xl font-bold tracking-tight text-white">
