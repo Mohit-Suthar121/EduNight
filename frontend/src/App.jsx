@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom'
 import StudentDashboard from './pages/StudentDashboard'
 import MainLayout from './components/MainLayout'
 import CoursesPage from './pages/CoursesPage'
+import CourseDetailsPage from './pages/CourseDetailsPage'
 
 function App() {
 
@@ -17,6 +18,9 @@ function App() {
           <Route path='/' element={<HomePage />} />
           <Route path='/dashboard' element={<StudentDashboard />} />
           <Route path='/courses' element={<CoursesPage/>} />
+          {/* <Route path='/course-details' element={<CourseDetailsPage/>} /> */}
+          <Route path='/courses/:id' element={<CourseDetailsPage/>} />
+          
         </Route>
       </Routes>
 

@@ -1,115 +1,475 @@
 import React, { useMemo, useState } from 'react';
-
-
-
-// <option value={"rating"} >Highest Rated</option>
-// <option value={"newest"} >Newest First</option>
-// <option value={"price-asc"} >Price: Low to High</option>
-// <option value={"price-desc"} >Price: High to Low</option>
-
-
+import CourseCard from '../components/CourseCard';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function CoursesPage() {
 
-
+    const navigate = useNavigate();
     // Mock Courses Data for Exploration Page
     const ALL_COURSES = [
         {
             id: '1',
             title: 'Complete MERN Stack Web Development',
-            instructor: 'Alex Rivera',
+            instructor: {
+                name: 'Alex Rivera',
+                role: 'Senior Full Stack Engineer',
+                bio: '10+ years building scalable cloud architectures and real-time JS applications.',
+                avatar: 'AR',
+            },
             category: 'Full Stack',
             duration: '42 hrs',
             rating: 4.9,
             reviews: 1280,
             price: 89.99,
+            originalPrice: 129.99,
             level: 'Intermediate',
             enrolled: '4.5k students',
             badge: 'Bestseller',
             publishedAt: '2026-06-15',
             gradient: 'from-blue-600 to-indigo-900',
-            description: 'Master MongoDB, Express.js, React, and Node.js by building production-ready real-time web applications.',
+            description:
+                'Master MongoDB, Express.js, React, and Node.js by building production-ready real-time web applications.',
+            prerequisites: [
+                'Basic JavaScript (ES6+)',
+                'HTML5 & CSS3 fundamentals',
+            ],
+            features: [
+                '42 hours on-demand video',
+                '15 downloadable coding exercises',
+                'Full source code access on GitHub',
+                'Certificate of Completion',
+                'Lifetime access',
+            ],
+            modules: [
+                {
+                    id: 'm1',
+                    title: 'Module 1: Modern JavaScript & Async Fundamentals',
+                    duration: '4h 15m',
+                    lessons: [
+                        'Event Loop & Call Stack',
+                        'Promises & Async/Await',
+                        'ES6+ Syntax Essentials',
+                    ],
+                },
+                {
+                    id: 'm2',
+                    title: 'Module 2: Building Scalable Backends with Node & Express',
+                    duration: '8h 30m',
+                    lessons: [
+                        'RESTful API Design',
+                        'Express Middleware Architecture',
+                        'Error Handling & Logging',
+                    ],
+                },
+                {
+                    id: 'm3',
+                    title: 'Module 3: Database Design with MongoDB Atlas',
+                    duration: '6h 45m',
+                    lessons: [
+                        'Schema Modeling & Indexing',
+                        'Aggregation Framework',
+                        'Mongoose ODM Integration',
+                    ],
+                },
+                {
+                    id: 'm4',
+                    title: 'Module 4: Real-Time Communication with Socket.io',
+                    duration: '7h 10m',
+                    lessons: [
+                        'WebSocket Handshakes',
+                        'Room Management & Events',
+                        'Building a Real-Time Chat Engine',
+                    ],
+                },
+            ],
         },
+
         {
             id: '2',
             title: 'Data Structures & Algorithms in C++',
-            instructor: 'Dr. Sarah Chen',
+            instructor: {
+                name: 'Dr. Sarah Chen',
+                role: 'Algorithm Specialist & CS Professor',
+                bio: 'Author of 3 DSA books and competitive programming mentor.',
+                avatar: 'SC',
+            },
             category: 'Algorithms',
             duration: '55 hrs',
             rating: 4.8,
             reviews: 2150,
             price: 74.99,
+            originalPrice: 109.99,
             level: 'Beginner',
             enrolled: '8.9k students',
             badge: 'Popular',
             publishedAt: '2026-04-22',
             gradient: 'from-indigo-600 to-slate-900',
-            description: 'Deep dive into memory management, tree traversals, dynamic programming, and graph algorithms.',
+            description:
+                'Deep dive into memory management, tree traversals, dynamic programming, and graph algorithms.',
+            prerequisites: [
+                'Basic C++ syntax knowledge',
+                'Basic programming fundamentals',
+            ],
+            features: [
+                '55 hours on-demand video',
+                '100+ LeetCode style practice problems',
+                'Certificate of Completion',
+                'Lifetime access',
+            ],
+            modules: [
+                {
+                    id: 'm1',
+                    title: 'Module 1: Pointers & Memory Allocation',
+                    duration: '10h',
+                    lessons: [
+                        'Stack vs Heap',
+                        'Smart Pointers',
+                        'Memory Leaks Prevention',
+                    ],
+                },
+                {
+                    id: 'm2',
+                    title: 'Module 2: Trees & Graph Traversals',
+                    duration: '18h',
+                    lessons: [
+                        'Binary Search Trees',
+                        'DFS & BFS Algorithms',
+                        'Dijkstra & Shortest Path',
+                    ],
+                },
+                {
+                    id: 'm3',
+                    title: 'Module 3: Dynamic Programming',
+                    duration: '14h',
+                    lessons: [
+                        'Memoization & Tabulation',
+                        'Knapsack Problems',
+                        'LCS & LIS Patterns',
+                    ],
+                },
+                {
+                    id: 'm4',
+                    title: 'Module 4: Advanced Graph Algorithms',
+                    duration: '13h',
+                    lessons: [
+                        'Minimum Spanning Trees',
+                        'Topological Sorting',
+                        'Network Flow Algorithms',
+                    ],
+                },
+            ],
         },
+
         {
             id: '3',
             title: 'Next.js 15 & Socket.io Real-Time Apps',
-            instructor: 'Marcus Vance',
+            instructor: {
+                name: 'Marcus Vance',
+                role: 'Senior React & Cloud Engineer',
+                bio: 'Full stack engineer specializing in real-time systems and modern React architectures.',
+                avatar: 'MV',
+            },
             category: 'Full Stack',
             duration: '28 hrs',
             rating: 4.95,
             reviews: 840,
             price: 94.99,
+            originalPrice: 139.99,
             level: 'Advanced',
             enrolled: '1.8k students',
             badge: 'Hot & New',
             publishedAt: '2026-08-10',
             gradient: 'from-blue-500 to-cyan-900',
-            description: 'Build modern server-rendered applications integrated with WebSockets for instant data synchronization.',
+            description:
+                'Build modern server-rendered applications integrated with WebSockets for instant data synchronization.',
+            prerequisites: [
+                'Intermediate JavaScript knowledge',
+                'Basic React knowledge',
+                'Understanding of REST APIs',
+            ],
+            features: [
+                '28 hours on-demand video',
+                '12 real-world coding projects',
+                'Production-ready source code',
+                'Certificate of Completion',
+                'Lifetime access',
+            ],
+            modules: [
+                {
+                    id: 'm1',
+                    title: 'Module 1: Next.js 15 Fundamentals',
+                    duration: '6h 20m',
+                    lessons: [
+                        'App Router Architecture',
+                        'Server & Client Components',
+                        'Data Fetching & Caching',
+                    ],
+                },
+                {
+                    id: 'm2',
+                    title: 'Module 2: Advanced Next.js Applications',
+                    duration: '7h 30m',
+                    lessons: [
+                        'Authentication & Authorization',
+                        'Server Actions',
+                        'Middleware & Route Handlers',
+                    ],
+                },
+                {
+                    id: 'm3',
+                    title: 'Module 3: Socket.io Real-Time Communication',
+                    duration: '8h 10m',
+                    lessons: [
+                        'Socket.io Architecture',
+                        'Rooms & Namespaces',
+                        'Real-Time Event Handling',
+                    ],
+                },
+                {
+                    id: 'm4',
+                    title: 'Module 4: Production Deployment',
+                    duration: '6h',
+                    lessons: [
+                        'Environment Configuration',
+                        'Scaling WebSocket Servers',
+                        'Deploying to Vercel & Cloud Platforms',
+                    ],
+                },
+            ],
         },
+
         {
             id: '4',
             title: 'UI/UX Design Systems with Tailwind CSS',
-            instructor: 'Elena Rostova',
+            instructor: {
+                name: 'Elena Rostova',
+                role: 'Product Designer & Design Systems Lead',
+                bio: 'Product designer focused on accessible interfaces and scalable design systems.',
+                avatar: 'ER',
+            },
             category: 'Design',
             duration: '18 hrs',
             rating: 4.7,
             reviews: 620,
             price: 49.99,
+            originalPrice: 69.99,
             level: 'Beginner',
             enrolled: '3.1k students',
             badge: null,
             publishedAt: '2026-03-18',
             gradient: 'from-indigo-700 to-blue-900',
-            description: 'Craft responsive, dark-mode friendly, accessible, and scalable design component systems.',
+            description:
+                'Craft responsive, dark-mode friendly, accessible, and scalable design component systems.',
+            prerequisites: [
+                'Basic HTML & CSS',
+                'Basic understanding of responsive design',
+            ],
+            features: [
+                '18 hours on-demand video',
+                '30+ reusable UI components',
+                'Figma design resources',
+                'Certificate of Completion',
+                'Lifetime access',
+            ],
+            modules: [
+                {
+                    id: 'm1',
+                    title: 'Module 1: Design System Fundamentals',
+                    duration: '4h',
+                    lessons: [
+                        'Design Tokens',
+                        'Typography Systems',
+                        'Color & Spacing Scales',
+                    ],
+                },
+                {
+                    id: 'm2',
+                    title: 'Module 2: Tailwind CSS Foundations',
+                    duration: '5h',
+                    lessons: [
+                        'Utility-First CSS',
+                        'Responsive Design',
+                        'Dark Mode & Themes',
+                    ],
+                },
+                {
+                    id: 'm3',
+                    title: 'Module 3: Building Reusable Components',
+                    duration: '5h',
+                    lessons: [
+                        'Buttons & Forms',
+                        'Cards & Navigation',
+                        'Modal & Dialog Systems',
+                    ],
+                },
+                {
+                    id: 'm4',
+                    title: 'Module 4: Accessibility & Production',
+                    duration: '4h',
+                    lessons: [
+                        'WCAG Fundamentals',
+                        'Keyboard Navigation',
+                        'Design System Documentation',
+                    ],
+                },
+            ],
         },
+
         {
             id: '5',
             title: 'Docker, Kubernetes & AWS for Developers',
-            instructor: 'David Miller',
+            instructor: {
+                name: 'David Miller',
+                role: 'Cloud Infrastructure Architect',
+                bio: 'Cloud architect with extensive experience designing and scaling distributed systems on AWS.',
+                avatar: 'DM',
+            },
             category: 'Cloud & DevOps',
             duration: '36 hrs',
             rating: 4.85,
             reviews: 1100,
             price: 84.99,
+            originalPrice: 119.99,
             level: 'Intermediate',
             enrolled: '2.9k students',
             badge: 'Featured',
             publishedAt: '2026-05-07',
             gradient: 'from-blue-700 to-slate-900',
-            description: 'Containerize, deploy, and scale microservices architecture on modern cloud infrastructure.',
+            description:
+                'Containerize, deploy, and scale microservices architecture on modern cloud infrastructure.',
+            prerequisites: [
+                'Basic Linux commands',
+                'Basic networking concepts',
+                'Understanding of REST APIs',
+            ],
+            features: [
+                '36 hours on-demand video',
+                '20 hands-on cloud labs',
+                'AWS deployment projects',
+                'Certificate of Completion',
+                'Lifetime access',
+            ],
+            modules: [
+                {
+                    id: 'm1',
+                    title: 'Module 1: Docker Fundamentals',
+                    duration: '8h',
+                    lessons: [
+                        'Images & Containers',
+                        'Dockerfiles & Docker Compose',
+                        'Container Networking',
+                    ],
+                },
+                {
+                    id: 'm2',
+                    title: 'Module 2: Kubernetes Essentials',
+                    duration: '10h',
+                    lessons: [
+                        'Pods & Deployments',
+                        'Services & Ingress',
+                        'ConfigMaps & Secrets',
+                    ],
+                },
+                {
+                    id: 'm3',
+                    title: 'Module 3: AWS Cloud Infrastructure',
+                    duration: '10h',
+                    lessons: [
+                        'EC2 & VPC',
+                        'S3 & CloudFront',
+                        'IAM & Security Groups',
+                    ],
+                },
+                {
+                    id: 'm4',
+                    title: 'Module 4: Production Deployment & Scaling',
+                    duration: '8h',
+                    lessons: [
+                        'CI/CD Pipelines',
+                        'Auto Scaling',
+                        'Monitoring with CloudWatch',
+                    ],
+                },
+            ],
         },
+
         {
             id: '6',
             title: 'Advanced JavaScript & Async Patterns',
-            instructor: 'Alex Rivera',
+            instructor: {
+                name: 'Alex Rivera',
+                role: 'Senior Full Stack Engineer',
+                bio: '10+ years building scalable cloud architectures and real-time JavaScript applications.',
+                avatar: 'AR',
+            },
             category: 'Full Stack',
             duration: '22 hrs',
             rating: 4.9,
             reviews: 950,
             price: 59.99,
+            originalPrice: 89.99,
             level: 'Advanced',
             enrolled: '5.2k students',
             badge: null,
             publishedAt: '2026-07-28',
             gradient: 'from-cyan-600 to-blue-900',
-            description: 'Master event loops, promises, generators, custom reactive systems, and memory profiling.',
+            description:
+                'Master event loops, promises, generators, custom reactive systems, and memory profiling.',
+            prerequisites: [
+                'Strong JavaScript fundamentals',
+                'ES6+ knowledge',
+                'Basic Node.js experience',
+            ],
+            features: [
+                '22 hours on-demand video',
+                '25 advanced coding challenges',
+                'Performance optimization projects',
+                'Certificate of Completion',
+                'Lifetime access',
+            ],
+            modules: [
+                {
+                    id: 'm1',
+                    title: 'Module 1: JavaScript Runtime & Event Loop',
+                    duration: '5h',
+                    lessons: [
+                        'Call Stack & Event Loop',
+                        'Microtasks & Macrotasks',
+                        'Browser Runtime Architecture',
+                    ],
+                },
+                {
+                    id: 'm2',
+                    title: 'Module 2: Advanced Async Programming',
+                    duration: '6h',
+                    lessons: [
+                        'Promises & Async/Await',
+                        'Promise Combinators',
+                        'Concurrency Patterns',
+                    ],
+                },
+                {
+                    id: 'm3',
+                    title: 'Module 3: Generators & Reactive Systems',
+                    duration: '5h',
+                    lessons: [
+                        'Generators & Iterators',
+                        'Custom Event Emitters',
+                        'Reactive Programming Concepts',
+                    ],
+                },
+                {
+                    id: 'm4',
+                    title: 'Module 4: JavaScript Performance',
+                    duration: '6h',
+                    lessons: [
+                        'Memory Management',
+                        'Memory Leak Detection',
+                        'Performance Profiling & Optimization',
+                    ],
+                },
+            ],
         },
     ];
 
@@ -240,7 +600,6 @@ export default function CoursesPage() {
                                         <label key={idx} className="flex items-center gap-2.5 text-xs text-slate-400 hover:text-white cursor-pointer py-1">
                                             <input
                                                 type="checkbox"
-                                                defaultChecked={idx === 0}
                                                 className="rounded border-slate-800 bg-slate-950 text-blue-600 focus:ring-0"
                                                 value={cat}
                                                 checked={selectedFilterCategories.includes(cat)}
@@ -262,7 +621,6 @@ export default function CoursesPage() {
                                             <input
                                                 type="radio"
                                                 name="level"
-                                                defaultChecked={idx === 0}
                                                 className="border-slate-800 bg-slate-950 text-blue-600 focus:ring-0"
                                                 value={lvl}
                                                 checked={difficultyLevel === lvl}
@@ -282,7 +640,6 @@ export default function CoursesPage() {
                                         <label key={idx} className="flex items-center gap-2.5 text-xs text-slate-400 hover:text-white cursor-pointer py-1">
                                             <input
                                                 type="checkbox"
-                                                defaultChecked={idx === 0}
                                                 className="rounded border-slate-800 bg-slate-950 text-blue-600 focus:ring-0"
                                                 checked={courseDuration.includes(dur)}
                                                 onChange={handleDuration}
@@ -333,62 +690,7 @@ export default function CoursesPage() {
                                 else if (duration >= 10 && duration < 30) newDuration = "10-30 Hours";
                                 else if (duration >= 30) newDuration = "30+ Hours";
 
-                                return ((selectedFilterCategories.includes(course.category) || selectedFilterCategories.includes("All Categories")) && (difficultyLevel === "All Levels" || course.level === difficultyLevel) && (courseDuration.includes("Any Duration") || courseDuration.includes(newDuration))) ?
-                                    <div
-                                        key={course.id}
-                                        className="group cursor-pointer rounded-2xl bg-slate-900/60 border border-slate-800/80 hover:border-blue-500/50 transition-all duration-300 overflow-hidden flex flex-col justify-between hover:-translate-y-1 shadow-lg hover:shadow-blue-950/40"
-                                    >
-                                        <div>
-                                            {/* Card Cover */}
-                                            <div className={`h-36 w-full bg-gradient-to-tr ${course.gradient} p-4 flex flex-col justify-between relative overflow-hidden`}>
-                                                <div className="flex justify-between items-center">
-                                                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-slate-950/80 text-blue-300 border border-blue-500/30">
-                                                        {course.category}
-                                                    </span>
-                                                    {course.badge && (
-                                                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/90 text-slate-950">
-                                                            {course.badge}
-                                                        </span>
-                                                    )}
-                                                </div>
-                                                <div className="text-white font-semibold text-xs drop-shadow">
-                                                    {course.level} • {course.enrolled}
-                                                </div>
-                                            </div>
-
-                                            {/* Card Content */}
-                                            <div className="p-4 space-y-2.5">
-                                                <h3 className="font-bold text-slate-100 text-base line-clamp-2 group-hover:text-blue-400 transition-colors">
-                                                    {course.title}
-                                                </h3>
-
-                                                <p className="text-xs text-slate-400 line-clamp-2">{course.description}</p>
-
-                                                <p className="text-xs text-slate-400">By <span className="text-slate-300">{course.instructor}</span></p>
-
-                                                <div className="flex items-center gap-3 text-xs text-slate-400 pt-1">
-                                                    <span className="flex items-center gap-1">
-                                                        <svg className="w-3.5 h-3.5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                        </svg>
-                                                        {course.duration}
-                                                    </span>
-                                                    <span>•</span>
-                                                    <span className="flex items-center gap-1 text-amber-400 font-medium">
-                                                        ★ {course.rating} <span className="text-slate-500">({course.reviews})</span>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {/* Card Bottom CTA */}
-                                        <div className="p-4 flex items-center justify-between border-t border-slate-800/50 mt-4">
-                                            <span className="text-lg font-bold text-white">$ {course.price}</span>
-                                            <button className="px-3.5 py-1.5 rounded-xl bg-blue-600/20 hover:bg-blue-600 text-blue-400 hover:text-white border border-blue-500/30 text-xs font-semibold transition-all">
-                                                Enroll Course
-                                            </button>
-                                        </div>
-                                    </div> : ""
+                                return ((selectedFilterCategories.includes(course.category) || selectedFilterCategories.includes("All Categories")) && (difficultyLevel === "All Levels" || course.level === difficultyLevel) && (courseDuration.includes("Any Duration") || courseDuration.includes(newDuration))) ? <CourseCard key={course.id} onClick={() => { navigate(`/courses/${course.id}`) }} course={course} /> : ""
 
                             })}
                         </div>
